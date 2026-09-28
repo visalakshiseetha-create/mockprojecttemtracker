@@ -1,0 +1,54 @@
+/* ============================================================
+   FILE: css/responsive.css
+   ROLE: Breakpoints. The sidebar (layout.css) collapses into a
+   slide-in drawer below 900px, opened from a slim top bar.
+   Grids stack the same way as before down to mobile.
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .summary-bar { grid-template-columns: repeat(2, 1fr); }
+  .content-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 900px) {
+  .dashboard-grid { grid-template-columns: 1fr; }
+  .field-row { grid-template-columns: 1fr; }
+
+  /* Sidebar becomes an off-canvas drawer */
+  .app-shell { flex-direction: column; }
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    height: 100vh;
+    margin: 0;
+    border-radius: 0;
+    transform: translateX(-100%);
+    transition: transform var(--duration-slow) var(--ease-standard);
+    z-index: 90;
+    width: 260px;
+  }
+  .sidebar.is-open { transform: translateX(0); }
+  .topbar { display: flex; }
+}
+
+@media (max-width: 640px) {
+  .container { padding: 0 var(--space-3); }
+  .main { padding: var(--space-4) var(--space-3) var(--space-5); }
+  .summary-bar { grid-template-columns: 1fr 1fr; gap: var(--space-2); }
+  .summary-card { padding: var(--space-3); }
+  .summary-card__value { font-size: 1.25rem; }
+  .page-header { flex-direction: column; align-items: flex-start; }
+  .toolbar { flex-direction: column; align-items: stretch; }
+  .filter-group { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+  .task-item, .expense-item { flex-wrap: wrap; }
+  .task-item__actions, .expense-item__actions { margin-left: auto; }
+  .chart-wrap { flex-direction: column; }
+  .modal { padding: var(--space-4); }
+  .profile-type-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 400px) {
+  .summary-bar { grid-template-columns: 1fr; }
+  .quick-add-row { flex-direction: column; }
+  .quick-add-row .btn { width: 100%; }
+}

@@ -1,0 +1,153 @@
+/* ============================================================
+   FILE: css/layout.css
+   ROLE: Page skeleton. Beacon uses a LEFT SIDEBAR nav (spec:
+   "clean sidebar/navigation structure") instead of a top bar,
+   since there are 7 modules to link to. On mobile the sidebar
+   becomes a slide-in drawer opened from a slim top bar.
+   ============================================================ */
+
+.container { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 var(--space-4); }
+
+/* ---------- App shell: sidebar + content, side by side ---------- */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-3);
+  margin: var(--space-3);
+  position: sticky;
+  top: var(--space-3);
+  height: calc(100vh - var(--space-3) * 2);
+}
+
+.sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0 var(--space-2);
+}
+
+.sidebar__logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  object-fit: cover;
+}
+
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: background var(--duration-fast) var(--ease-standard),
+              color var(--duration-fast) var(--ease-standard);
+}
+.sidebar__link:hover { background: rgba(255, 255, 255, 0.06); color: var(--text-primary); }
+.sidebar__link.is-active {
+  background: var(--accent-dim);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ---------- Mobile top bar (hidden on desktop) ---------- */
+.topbar {
+  display: none;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+}
+.topbar__title { font-family: var(--font-display); font-weight: 700; }
+
+/* ---------- Content column ---------- */
+.app-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.main { flex: 1; padding: var(--space-5) var(--space-4) var(--space-6); }
+
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+.page-header__title { font-size: clamp(1.4rem, 1.6vw + 1rem, 1.9rem); }
+.page-header__subtitle { color: var(--text-secondary); margin-top: var(--space-1); font-size: 0.92rem; }
+
+/* ---------- Summary bar / stat cards ---------- */
+.summary-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3); margin-bottom: var(--space-4); }
+.summary-card { padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-1); }
+.summary-card__label { font-size: 0.78rem; color: var(--text-secondary); }
+.summary-card__value { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; }
+
+/* ---------- Dashboard grid ---------- */
+.dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); align-items: start; }
+.panel { padding: var(--space-4); }
+.panel__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-3); }
+.panel__header h2 { font-size: 1.08rem; }
+.panel__list { display: flex; flex-direction: column; gap: var(--space-2); max-height: 420px; overflow-y: auto; padding-right: var(--space-1); }
+.panel__list::-webkit-scrollbar { width: 6px; }
+.panel__list::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 10px; }
+
+/* ---------- Toolbar / filters ---------- */
+.toolbar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); margin-bottom: var(--space-3); flex-wrap: wrap; }
+.filter-group { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+
+/* ---------- Full page list layout ---------- */
+.content-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: var(--space-4); align-items: start; }
+
+/* ---------- Modal ---------- */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: center; padding: var(--space-4);
+  background: rgba(4, 5, 10, 0.6);
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  opacity: 0; visibility: hidden;
+  transition: opacity var(--duration-slow) var(--ease-standard), visibility var(--duration-slow) var(--ease-standard);
+}
+.modal-overlay.is-open { opacity: 1; visibility: visible; }
+.modal {
+  width: 100%; max-width: 440px; padding: var(--space-5);
+  transform: translateY(14px); opacity: 0;
+  transition: transform var(--duration-slow) var(--ease-standard), opacity var(--duration-slow) var(--ease-standard);
+  max-height: 90vh; overflow-y: auto;
+}
+.modal-overlay.is-open .modal { transform: translateY(0); opacity: 1; }
+.modal__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-4); }
+.modal__close { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; }
+
+/* ---------- Forms ---------- */
+.field { display: flex; flex-direction: column; gap: var(--space-1); margin-bottom: var(--space-3); }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+.field label { font-size: 0.83rem; color: var(--text-secondary); }
+.modal__actions { display: flex; justify-content: flex-end; gap: var(--space-2); margin-top: var(--space-4); }
+
+.empty-state { text-align: center; padding: var(--space-5) var(--space-3); color: var(--text-faint); }
+.site-footer { text-align: center; padding: var(--space-4); color: var(--text-faint); font-size: 0.82rem; }

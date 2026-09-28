@@ -1,0 +1,87 @@
+<!--
+  FILE: budget.html
+  ROLE: The Budget module. Lets the student set one overall
+  monthly spending ceiling plus optional per-category ceilings,
+  and shows spent/remaining/progress for each against this
+  month's actual expenses. Logic in js/budget.js.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beacon — Budget</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/glass-3d.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="app-background"></div>
+  <div class="orb orb-1"></div>
+
+  <div class="app-shell">
+    <aside class="sidebar surface" id="sidebar">
+      <div class="sidebar__brand">
+        <img src="assets/beacon-logo.jpg" class="sidebar__logo" alt="Beacon logo">
+        Beacon
+      </div>
+      <nav class="sidebar__nav">
+        <a class="sidebar__link" href="index.html">🏠 Dashboard</a>
+        <a class="sidebar__link" href="tasks.html">✅ Tasks</a>
+        <a class="sidebar__link" href="expenses.html">💳 Expenses</a>
+        <a class="sidebar__link" href="budget.html">🎯 Budget</a>
+        <a class="sidebar__link" href="calendar.html">📅 Calendar</a>
+        <a class="sidebar__link" href="analytics.html">📊 Analytics</a>
+        <a class="sidebar__link" href="profile.html">👤 Profile</a>
+      </nav>
+      <button class="btn btn-ghost" id="export-data-btn">⬇ Export data</button>
+    </aside>
+
+    <div class="app-content">
+      <header class="topbar">
+        <button class="icon-btn" id="sidebar-toggle" aria-label="Toggle menu">☰</button>
+        <span class="topbar__title">Beacon</span>
+      </header>
+
+      <main class="main">
+        <div class="container">
+          <div class="page-header">
+            <div>
+              <h1 class="page-header__title">Budget</h1>
+              <p class="page-header__subtitle">Set limits, watch them fill up as you spend this month.</p>
+            </div>
+          </div>
+
+          <!-- Overall monthly ceiling -->
+          <section class="panel surface" style="margin-bottom:16px;">
+            <div class="panel__header"><h2>Monthly overview</h2></div>
+            <div class="budget-row">
+              <div class="budget-row__top">
+                <div class="budget-row__name">🎯 Overall monthly budget</div>
+                <div class="field-row" style="grid-template-columns:auto auto;gap:8px;align-items:center;">
+                  <input class="input" type="number" min="0" step="1" id="monthly-budget-input" placeholder="No limit set" style="width:140px;">
+                </div>
+              </div>
+              <div class="budget-row__amounts" id="monthly-budget-amounts">—</div>
+              <div class="budget-bar"><div class="budget-bar__fill" id="monthly-budget-fill" style="width:0%;"></div></div>
+            </div>
+          </section>
+
+          <!-- Per-category limits -->
+          <section class="panel surface">
+            <div class="panel__header"><h2>Category limits</h2></div>
+            <div class="panel__list" id="category-budget-list" style="max-height:none;"></div>
+          </section>
+        </div>
+      </main>
+
+      <footer class="site-footer">Leave a category's limit blank to track spending without a cap.</footer>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/budget.js"></script>
+</body>
+</html>

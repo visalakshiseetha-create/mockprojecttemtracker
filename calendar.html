@@ -1,0 +1,82 @@
+<!--
+  FILE: calendar.html
+  ROLE: The Calendar module — a month grid view of task deadlines.
+  Clicking a day shows the tasks due that day in the side panel.
+  Logic in js/calendar.js.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beacon — Calendar</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/glass-3d.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="app-background"></div>
+  <div class="orb orb-1"></div>
+
+  <div class="app-shell">
+    <aside class="sidebar surface" id="sidebar">
+      <div class="sidebar__brand">
+        <img src="assets/beacon-logo.jpg" class="sidebar__logo" alt="Beacon logo">
+        Beacon
+      </div>
+      <nav class="sidebar__nav">
+        <a class="sidebar__link" href="index.html">🏠 Dashboard</a>
+        <a class="sidebar__link" href="tasks.html">✅ Tasks</a>
+        <a class="sidebar__link" href="expenses.html">💳 Expenses</a>
+        <a class="sidebar__link" href="budget.html">🎯 Budget</a>
+        <a class="sidebar__link" href="calendar.html">📅 Calendar</a>
+        <a class="sidebar__link" href="analytics.html">📊 Analytics</a>
+        <a class="sidebar__link" href="profile.html">👤 Profile</a>
+      </nav>
+      <button class="btn btn-ghost" id="export-data-btn">⬇ Export data</button>
+    </aside>
+
+    <div class="app-content">
+      <header class="topbar">
+        <button class="icon-btn" id="sidebar-toggle" aria-label="Toggle menu">☰</button>
+        <span class="topbar__title">Beacon</span>
+      </header>
+
+      <main class="main">
+        <div class="container">
+          <div class="page-header">
+            <div>
+              <h1 class="page-header__title">Calendar</h1>
+              <p class="page-header__subtitle">A time-based view of your task deadlines.</p>
+            </div>
+          </div>
+
+          <div class="content-grid">
+            <section class="panel surface">
+              <div class="panel__header">
+                <button class="icon-btn" id="cal-prev" aria-label="Previous month">←</button>
+                <h2 id="cal-month-label">Month Year</h2>
+                <button class="icon-btn" id="cal-next" aria-label="Next month">→</button>
+              </div>
+              <div class="calendar-grid" id="cal-weekdays"></div>
+              <div class="calendar-grid" id="cal-grid" style="margin-top:6px;"></div>
+            </section>
+
+            <aside class="panel surface">
+              <div class="panel__header"><h2 id="cal-selected-label">Today</h2></div>
+              <div class="panel__list" id="cal-day-tasks" style="max-height:none;"></div>
+            </aside>
+          </div>
+        </div>
+      </main>
+
+      <footer class="site-footer">Dots mark days with a task due — click any day to see the list.</footer>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/calendar.js"></script>
+</body>
+</html>

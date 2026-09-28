@@ -1,0 +1,127 @@
+/* ============================================================
+   FILE: css/glass-3d.css
+   ROLE: Visual identity — RESTRAINED per the brand spec. Unlike
+   a full-glass UI, Beacon keeps a mostly solid dark background,
+   ONE soft cyan glow (not scattered rainbow orbs), and reserves
+   the frosted-glass treatment (.glass) for a few surfaces where
+   it adds real hierarchy: the sidebar, modals, and the top stat
+   cards. Everything else uses the plain solid .surface style.
+   3D tilt is kept but toned down ("minimal transitions" in spec).
+   ============================================================ */
+
+/* ---------- Background: solid dark base + one glow ---------- */
+.app-background {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(60% 50% at 50% -10%, rgba(69, 230, 201, 0.10), transparent 70%),
+    linear-gradient(180deg, var(--bg-base-2), var(--bg-base));
+}
+
+/* Single soft glow behind the logo/hero — replaces the old
+   multi-orb scattered look. Barely animated (spec: minimal motion). */
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  z-index: -1;
+  opacity: 0.35;
+  pointer-events: none;
+}
+.orb-1 {
+  width: 480px;
+  height: 480px;
+  top: -12%;
+  left: 30%;
+  background: var(--accent);
+  animation: glowPulse 12s ease-in-out infinite;
+}
+/* orb-2 / orb-3 kept as empty, inert hooks for backward compatibility
+   with existing markup — intentionally not styled, so the page
+   reads as one restrained glow instead of three scattered ones. */
+.orb-2, .orb-3 { display: none; }
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.28; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.05); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb-1 { animation: none; }
+}
+
+/* ---------- Solid surface (the default card treatment) ---------- */
+.surface {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  transition: box-shadow var(--duration-fast) var(--ease-standard),
+              transform var(--duration-fast) var(--ease-standard);
+}
+
+/* ---------- Glass treatment (used selectively only) ---------- */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+  transition: box-shadow var(--duration-fast) var(--ease-standard),
+              transform var(--duration-fast) var(--ease-standard);
+}
+.glass-strong { background: var(--glass-bg-strong); }
+
+.surface:hover, .glass:hover {
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+}
+
+/* ---------- 3D tilt: subtle, not showy ---------- */
+.tilt {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+.tilt-content { transform: translateZ(10px); }
+
+@media (pointer: coarse) {
+  .tilt { transform: none !important; }
+}
+
+/* ---------- Buttons: simple, clearly differentiated, low drama ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 11px 20px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  background: var(--surface-2);
+  border: 1px solid var(--surface-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  transition: background var(--duration-fast) var(--ease-standard),
+              transform var(--duration-fast) var(--ease-standard),
+              box-shadow var(--duration-fast) var(--ease-standard);
+  min-height: 44px;
+}
+.btn:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); }
+.btn:active { transform: translateY(0); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25); }
+
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+.btn-danger {
+  background: rgba(242, 104, 92, 0.14);
+  border-color: rgba(242, 104, 92, 0.4);
+  color: var(--status-high);
+}
+.btn-ghost { background: transparent; box-shadow: none; border-color: transparent; }
+.btn-ghost:hover { background: rgba(255, 255, 255, 0.06); transform: none; }
+.btn-icon { padding: 10px; min-width: 44px; border-radius: var(--radius-sm); }

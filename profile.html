@@ -1,0 +1,90 @@
+<!--
+  FILE: profile.html
+  ROLE: The Profile & Settings module. Stores which kind of
+  student is using the app (Day Scholar / Hostel / PG per spec)
+  plus a name, and offers a reset-all-data control. Logic in
+  js/profile.js.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beacon — Profile</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/glass-3d.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="app-background"></div>
+  <div class="orb orb-1"></div>
+
+  <div class="app-shell">
+    <aside class="sidebar surface" id="sidebar">
+      <div class="sidebar__brand">
+        <img src="assets/beacon-logo.jpg" class="sidebar__logo" alt="Beacon logo">
+        Beacon
+      </div>
+      <nav class="sidebar__nav">
+        <a class="sidebar__link" href="index.html">🏠 Dashboard</a>
+        <a class="sidebar__link" href="tasks.html">✅ Tasks</a>
+        <a class="sidebar__link" href="expenses.html">💳 Expenses</a>
+        <a class="sidebar__link" href="budget.html">🎯 Budget</a>
+        <a class="sidebar__link" href="calendar.html">📅 Calendar</a>
+        <a class="sidebar__link" href="analytics.html">📊 Analytics</a>
+        <a class="sidebar__link" href="profile.html">👤 Profile</a>
+      </nav>
+      <button class="btn btn-ghost" id="export-data-btn">⬇ Export data</button>
+    </aside>
+
+    <div class="app-content">
+      <header class="topbar">
+        <button class="icon-btn" id="sidebar-toggle" aria-label="Toggle menu">☰</button>
+        <span class="topbar__title">Beacon</span>
+      </header>
+
+      <main class="main">
+        <div class="container" style="max-width:640px;">
+          <div class="page-header">
+            <div>
+              <h1 class="page-header__title">Profile &amp; Settings</h1>
+              <p class="page-header__subtitle">Tell Beacon a bit about your living situation.</p>
+            </div>
+          </div>
+
+          <section class="panel surface" style="margin-bottom:16px;">
+            <div class="panel__header"><h2>Student profile</h2></div>
+            <div class="field">
+              <label for="profile-name">Name (optional)</label>
+              <input class="input" id="profile-name" placeholder="Your name">
+            </div>
+            <div class="field">
+              <label>Living situation</label>
+              <div class="profile-type-grid" id="profile-type-grid"></div>
+            </div>
+            <button class="btn btn-primary" id="save-profile-btn" style="margin-top:8px;">Save profile</button>
+          </section>
+
+          <section class="panel surface">
+            <div class="panel__header"><h2>Data</h2></div>
+            <p class="page-header__subtitle" style="margin-bottom:12px;">
+              Everything in Beacon lives in this browser's local storage — nothing is sent anywhere.
+            </p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <button class="btn" id="export-data-btn-2">⬇ Export all data</button>
+              <button class="btn btn-danger" id="reset-data-btn">Reset all data</button>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer class="site-footer">Your profile just personalizes the app — it never leaves this device.</footer>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>
